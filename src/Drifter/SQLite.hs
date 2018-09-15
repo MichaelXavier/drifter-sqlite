@@ -20,7 +20,6 @@ import qualified Data.Set                         as Set
 import           Data.Time
 import           Database.SQLite.Simple
 import           Database.SQLite.Simple.FromField
-import           Database.SQLite.Simple.QQ
 import           Drifter
 -------------------------------------------------------------------------------
 
@@ -81,14 +80,13 @@ instance FromRow ChangeHistory where
 -- Queries
 -------------------------------------------------------------------------------
 bootstrapQ :: Query
-bootstrapQ = [sql|
-CREATE TABLE IF NOT EXISTS schema_migrations (
-    id              INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    name            TEXT        NOT NULL UNIQUE ON CONFLICT ROLLBACK,
-    description     TEXT,
-    time            DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-|]
+bootstrapQ = "\
+\  CREATE TABLE IF NOT EXISTS schema_migrations ( \
+\    id              INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\
+\    name            TEXT        NOT NULL UNIQUE ON CONFLICT ROLLBACK,\
+\    description     TEXT,\
+\    time            DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP\
+\  );"
 
 
 -------------------------------------------------------------------------------

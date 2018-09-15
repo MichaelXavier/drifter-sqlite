@@ -21,8 +21,6 @@ category: Database
 description:         Please see the README on GitHub at <https://github.com/MichaelXavier/drifter-sqlite#readme>
 
 default-extensions:
-  - TemplateHaskell
-  - QuasiQuotes
   - ScopedTypeVariables
   - TypeFamilies
   - GeneralizedNewtypeDeriving

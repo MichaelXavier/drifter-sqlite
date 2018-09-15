@@ -9,7 +9,6 @@ import           Control.Exception
 import           Data.IORef
 import           Data.Text                 (Text)
 import           Database.SQLite.Simple
-import           Database.SQLite.Simple.QQ
 import           Drifter
 import           System.Directory
 import           System.IO.Error
@@ -50,19 +49,14 @@ c1 :: Change SQLiteMigration
 c1 = Change (ChangeName "c1") (Just "create table") [] meth
   where
     meth = MigrationQuery q
-    q = [sql|
-          CREATE TABLE c1 (
-            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-            x text NOT NULL
-          );
-        |]
+    q = "CREATE TABLE c1 (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, x text NOT NULL);"
 
 
 c2 :: Change SQLiteMigration
 c2 = Change (ChangeName "c2") (Just "insert value") [] meth
   where
     meth = MigrationQuery q
-    q = [sql| INSERT INTO c1 (x) VALUES ('val'); |]
+    q = "INSERT INTO c1 (x) VALUES ('val');"
 
 -------------------------------------------------------------------------------
 c3 :: IORef Int -> Change SQLiteMigration
