@@ -1,0 +1,69 @@
+name:                drifter-sqlite
+version:             0.1.0.0
+github:              "MichaelXavier/drifter-sqlite"
+license:             BSD3
+author:              "Michael Xavier"
+maintainer:          "michael@michaelxavier.net"
+copyright:           "2018 Michael Xavier"
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+synopsis: SQLite support for the drifter schema migraiton tool
+description:
+  Support for sqlite-simple Query migrations as well as arbitrary Haskell IO functions. Be sure to check the examples dir for example usage.
+category: Database
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/MichaelXavier/drifter-sqlite#readme>
+
+default-extensions:
+  - TemplateHaskell
+  - QuasiQuotes
+  - ScopedTypeVariables
+  - TypeFamilies
+  - GeneralizedNewtypeDeriving
+  - OverloadedStrings
+
+dependencies:
+  - base >= 4.7 && < 5
+  - drifter >= 0.2.1
+  - sqlite-simple
+  - transformers
+  - mtl
+  - time
+  - containers
+
+library:
+  source-dirs: src
+
+when:
+  - condition: flag(lib-Werror)
+    then:
+      ghc-options: -Werror -Wall
+    else:
+      ghc-options: -Wall
+
+flags:
+  lib-Werror:
+    default: false
+    manual: true
+    description: "Treat warnings as errors"
+
+tests:
+  drifter-sqlite-test:
+    main:                Main.hs
+    source-dirs:         test
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+    dependencies:
+      - drifter-sqlite
+      - tasty
+      - tasty-hunit
+      - text
+      - directory

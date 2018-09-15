@@ -1,0 +1,6 @@
+resolver: lts-12.9
+packages:
+  - .
+flags:
+  drifter-sqlite:
+    lib-Werror: true
